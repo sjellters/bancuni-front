@@ -6,19 +6,21 @@ import * as tools from 'tools';
 function* login(action) {
   try {
     const { params } = action.payload;
-    const {
-      message: { result },
-    } = yield call(tools.Post, '/login', {
+    const { message } = yield call(tools.Post, '/login', {
       email: params.email,
       password: params.password,
     });
-    yield put(ducks.loginSuccess(result));
-    localStorage.setItem('auth', JSON.stringify(result));
+    yield put(ducks.loginSuccess(message));
+    yield put(ducks.showAlertSnackbar(tools.LOGIN_SUCCESSFULLY));
+    localStorage.setItem('auth', JSON.stringify(message));
   } catch (error) {
-    const {
-      message: { result },
-    } = error.response.data;
-    yield put(ducks.loginError(result));
+    const { message } = error.response.data;
+    yield put(ducks.loginError(message));
+    yield put(
+      ducks.showAlertSnackbar(
+        tools.createNewAlertSnackbarMessage('error', message)
+      )
+    );
   }
 }
 

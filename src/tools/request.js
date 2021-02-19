@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URl = 'http://127.0.0.1:3000/api/v1/';
+const BASE_URl = 'https://bankuni-core.herokuapp.com';
 
 const axiosInstance = (headers) => {
   let instance = axios.create({
