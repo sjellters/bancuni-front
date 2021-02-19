@@ -13,7 +13,7 @@ import {Typography } from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { verifyTransferRequest } from 'ducks';
+import { verifyTransferRequest, verifyConfirmTransferRequest } from 'ducks';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,9 +29,11 @@ export default function FormDialog() {
 
   const [open, setOpen] = React.useState(true);
   const classes = useStyles();
+  const auth = useSelector((state)=>state.auth);
+  const dispatch = useDispatch();
 
  const handlePay = () => {
-   
+   dispatch(verifyConfirmTransferRequest(transferData.data.id,auth.data["access-token"]));
  }
   const handleClickOpen = () => {
     setOpen(true);
@@ -50,7 +52,7 @@ export default function FormDialog() {
           <AccountCircleOutlinedIcon style={{ fontSize: 100 }}/>
         </div>
         <DialogTitle id="customized-dialog-title" style={{ textAlign: 'center' }}>
-          User
+          {transferData.data.id}
         </DialogTitle>
         <DialogContent dividers>
           <Typography> {transferData.data.message} </Typography>

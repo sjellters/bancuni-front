@@ -89,7 +89,10 @@ const TransferView = ({ route }) => {
     // receiver: 602f78b68a482e7872165ce9
     
     const handleContinue = (e)=>{
+        alert("go to Confirm")
+        console.log("Token desde vista",auth.data["access-token"]);
         dispatch(verifyTransferRequest(transfer,auth.data["access-token"]))
+        console.log("Transfer desde vista",transferData);
         //history.push('/dashboard/confirm')
     }
     const handleBack = (e)=>{
@@ -98,6 +101,7 @@ const TransferView = ({ route }) => {
 
   return (
     <Container className={classes.root}>
+        <ConfirmTransfer></ConfirmTransfer>,
         {transferData.validate?(<div>
             <ConfirmTransfer></ConfirmTransfer>
         </div>):(
