@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   Muipaper: {
     display: 'flex',
     flexDirection: 'column',
-    width: '300px',
+    width: '350px',
     height: 'auto',
     padding: '1rem'
   },
@@ -42,8 +42,8 @@ const CurrentAccount = ({ route }) => {
 
   const classes = useStyles();
 
-  const [dataUser, setDataUser] = useState([]);
-  const [account, setAccount] = useState([]);
+  const [dataUser, setDataUser] = useState(null);
+  const [account, setAccount] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -52,25 +52,32 @@ const CurrentAccount = ({ route }) => {
   const accountAllInfo = useSelector((state) => state.user);
 
 
-  console.log("Token desde vista",auth);
+  //console.log("Token desde vista",auth.data["access-token"]);
 
   useEffect(() => {
-    
-    dispatch(accountRequest());
-    //setAccount(accountInfo.data);
-    //console.log(account);
-
-    const id = "656565";
-    dispatch(userRequest(id));
-    //setDataUser(accountAllInfo.data);
-    //console.log(dataUser);
-
+    dispatch(accountRequest(auth.data["access-token"]));
   }, []);
 
+  useEffect(() => {
+    setAccount(accountInfo.data);
+  }, [accountInfo])
+
+  useEffect(() => {
+    if(account != null){
+      dispatch(userRequest(account.owner,auth.data["access-token"]));
+    }
+  }, [account]);
+
+  useEffect(() => {
+    setDataUser(accountAllInfo.data);
+  }, [accountAllInfo])
+
   return (
+    (dataUser && account) &&
     <React.Fragment>
       <main className={classes.root}>
         
+        {console.log(dataUser)}
         <Typography variant={'h4'} classes={{h4: classes.Tittle}}>
             Current Account
         </Typography>
@@ -78,8 +85,8 @@ const CurrentAccount = ({ route }) => {
         
         <Typography  variant={'h5'}>
           <span>
-          <AttachMoneyRoundedIcon style={{ fontSize: 20 }} />{dataUser.available}
-          </span>
+          <AttachMoneyRoundedIcon style={{ fontSize: 20 }} />{account.amount}
+          </span> 
         </Typography>
 
         <Paper classes={{elevation3: classes.Muipaper}} elevation={3}>
@@ -104,14 +111,14 @@ const CurrentAccount = ({ route }) => {
               Last Name: 
             </Typography>
             <Typography>
-              {dataUser.lastnames}
+              {dataUser.lastName}
             </Typography>
           </div>          
         </Paper>
-
-
       </main>
      </React.Fragment>
+    
+    
   );
 };
 

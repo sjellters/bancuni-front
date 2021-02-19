@@ -33,9 +33,9 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const userRequest = (params) => ({
+export const userRequest = (params, token) => ({
   type: USER_REQUEST,
-  payload: { params },
+  payload: { params , token },
 });
 
 export const userSuccess = (data) => ({

@@ -5,11 +5,13 @@ import * as tools from 'tools';
 
 function* transaction(action) {
   try {
+    const token = action.payload.token;
     const {
       message: { result },
-    } = yield call(tools.Get, '/transfers/history', {});
+    } = yield call(tools.Get, '/transfers/history', {}, {
+      Authorization: `Bearer ${token}`,
+    });
     yield put(ducks.transactionSuccess(result));
-    localStorage.setItem('transaction', JSON.stringify(result));
   } catch (error) {
     const {
       message: { result },

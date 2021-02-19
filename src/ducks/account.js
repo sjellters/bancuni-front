@@ -33,8 +33,9 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const accountRequest = () => ({
+export const accountRequest = (token) => ({
   type: ACCOUNT_REQUEST,
+  payload: { token }
 });
 
 export const accountSuccess = (data) => ({

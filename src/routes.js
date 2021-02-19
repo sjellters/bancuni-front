@@ -45,7 +45,7 @@ const routes = [
       {
         path: '/dashboard/account',
         exact: true,
-        component: () => withAuthentication(() => <DashboardHome />) //
+        component: withAuthentication(() => <DashboardHome />) //
       },
       {
         path: '/dashboard/account',

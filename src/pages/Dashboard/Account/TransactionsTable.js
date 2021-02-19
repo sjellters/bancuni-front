@@ -54,30 +54,28 @@ function formatDate(date) {
 const TransactionTable = ({ route }) => {
   const classes = useStyles();
 
-  const [data, setData] = useState([{
-    _id: "12354654",
-    createdAt: "2021-02-11T12:35:24.839+00:00",
-    type: "Send",
-    amount: "1000.00",
-    message: "I sent this."
-  }, ]);
+  const [data, setData] = useState(null);
 
   const dispatch = useDispatch();
 
+  const auth = useSelector((state) => state.auth);
   const transactionInfo = useSelector(state => state.transaction);
 
   useEffect(() => {
-    
-    dispatch(transactionRequest());
-    //setData(transactionInfo.data);
-    console.log(data);
-
+    dispatch(transactionRequest(auth.data["access-token"]));
   }, []);
 
+  useEffect(() => {
+    if(transactionInfo != null){
+      setData(transactionInfo.data);
+      console.log(data);
+    }
+  }, [transactionInfo]);
+
   return (
+    data &&
     <React.Fragment>
       <main className={classes.root}>
-
         <Typography variant={'h4'} classes={{h4: classes.Tittle}}>
             Transaction History
         </Typography>
@@ -94,8 +92,9 @@ const TransactionTable = ({ route }) => {
             </TableHead>
             <TableBody>
               {data.map((row) => (
-                <TableRow key={row._id}>
-                  <TableCell>{formatDate(row.createdAt)}</TableCell>
+                <TableRow key={row.id}>
+                  <TableCell>{new Date(row.startDate).toDateString()}</TableCell>
+                  
                   <TableCell component="th" scope="row">
                     {row.message}
                   </TableCell>

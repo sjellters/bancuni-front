@@ -8,11 +8,13 @@ function* account(action) {
   console.log(action);
 
   try {
+    const token = action.payload.token;
     const {
       message: { result },
-    } = yield call(tools.Get, '/account', {});
+    } = yield call(tools.Get, '/account', {}, {
+      Authorization: `Bearer ${token}`,
+    });
     yield put(ducks.accountSuccess(result));
-    localStorage.setItem('account', JSON.stringify(result));
   } catch (error) {
     console.log(error);
     const {

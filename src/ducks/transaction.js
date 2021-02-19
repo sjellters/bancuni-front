@@ -33,8 +33,9 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const transactionRequest = () => ({
+export const transactionRequest = (token) => ({
   type: TRANSACTION_REQUEST,
+  payload: { token }
 });
 
 export const transactionSuccess = (data) => ({

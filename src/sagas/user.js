@@ -8,16 +8,14 @@ function* user(action) {
     console.log(action);
 
   try {
-    const { params } = action.payload;
+    const { params , token } = action.payload;
 
-    console.log(params);
     const {
       message: { result },
-    } = yield call(tools.Get, `/users/${params}`, {
-      id: params.id,
+    } = yield call(tools.Get, `/users/${params}`, {}, {
+      Authorization: `Bearer ${token}`,
     });
     yield put(ducks.userSuccess(result));
-    localStorage.setItem('user', JSON.stringify(result));
   } catch (error) {
     console.log(error);
     const {
