@@ -3,8 +3,10 @@ import { Redirect } from 'react-router-dom';
 import withAuthentication from 'hocs/withAuthentication';
 import { DashboardLayout, ErrorLayout } from 'layout';
 import { PublicPage } from 'pages';
+import TransferView from './pages/dashboard/transfer/TransferView'
+import ConfirmTransfer from './pages/dashboard/transfer/ConfirmTransferView'
 
-import DashboardHome from 'pages/Dashboard/Account/index'
+import DashboardHome from 'pages/dashboard/Account'
 
 const routes = [
   {
@@ -48,9 +50,14 @@ const routes = [
         component: withAuthentication(() => <DashboardHome />) //
       },
       {
-        path: '/dashboard/account',
+        path: '/dashboard/transfers',
         exact: true,
-        component: () => <DashboardLayout route= {"/dashboard/account"} />
+        component: withAuthentication(() => <TransferView></TransferView>),
+      },
+      {
+        path: '/dashboard/confirm',
+        exact: true,
+        component: withAuthentication(() => <ConfirmTransfer></ConfirmTransfer>),
       },
     ],
   },
