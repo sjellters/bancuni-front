@@ -8,6 +8,7 @@ function* rootSaga() {
   yield all([
     fork(authSagas.loginSaga),
     fork(authSagas.registerSaga),
+    fork(authSagas.logoutSaga),
     fork(accountSagas.accountSaga),
     fork(userSagas.userSaga),
     fork(transactionSagas.transactionSaga),
