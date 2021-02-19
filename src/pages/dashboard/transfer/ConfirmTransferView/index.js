@@ -33,15 +33,14 @@ export default function FormDialog() {
 
  const handlePay = () => {
    dispatch(verifyConfirmTransferRequest(transferData.data.id,auth.data["access-token"]));
+   history.push('/dashboard/account')
  }
 
  const handleBack = () => {
   setOpen(false);
   history.push('/dashboard/account')
  }
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -65,8 +64,7 @@ export default function FormDialog() {
           Pay {user.data.names}
         </DialogTitle>
         <DialogContent dividers>
-          <Typography> {transferData.data.message} </Typography>
-
+          <Typography> Pay {transferData.data.message} </Typography>
         </DialogContent>
         <DialogActions className={classes.button}>
           <Button onClick={handlePay} variant="outlined" color="primary">
