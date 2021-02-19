@@ -31,23 +31,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TransferView = ({ route }) => {
+    const auth = useSelector((state)=>state.auth);
     const classes = useStyles();
     let history = useHistory();
     const dispatch = useDispatch();
     const [transfer,setTransfer ]= useState({
         available:"122000",
         sender : "Freider Achic",
-        reciever : "",
+        receiver : "",
         amount : "",
         message : ""
     });
 
-
+    const token1 = localStorage.getItem("auth");
+    console.log(token1["access-token"]);
     const handleChange = (e)=>{
         if(e.target.name==='amount'){
             setTransfer({...transfer, amount:e.target.value});
-        }else if(e.target.name==='reciever'){
-            setTransfer({...transfer, reciever:e.target.value});
+        }else if(e.target.name==='receiver'){
+            setTransfer({...transfer, receiver:e.target.value});
         }else if(e.target.name==='message'){
             setTransfer({...transfer, message:e.target.value});
         }else{
@@ -55,9 +57,11 @@ const TransferView = ({ route }) => {
         }
         console.log(transfer);
     }
+    
     const handleContinue = (e)=>{
         alert("go to Confirm")
-        dispatch(verifyTransferRequest(transfer))
+        console.log("Token desde vista",auth.data["access-token"]);
+        dispatch(verifyTransferRequest(transfer,auth.data["access-token"]))
         history.push('/dashboard/confirm')
     }
     const handleBack = (e)=>{
@@ -90,13 +94,13 @@ const TransferView = ({ route }) => {
                     <TextField
                         //autoComplete="Nombre"
                         //autoFocus="true"
-                        name="reciever"
+                        name="receiver"
                         variant="outlined"
                         required    
                         fullWidth
-                        id="reciever"
+                        id="receiver"
                         label="ID usuario destino"
-                        defaultValue={transfer.reciever}
+                        defaultValue={transfer.receiver}
                         autoFocus
                         onChange={handleChange}
                     />  
