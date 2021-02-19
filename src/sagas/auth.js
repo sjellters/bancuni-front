@@ -12,6 +12,7 @@ function* login(action) {
       email: params.email,
       password: params.password,
     });
+    console.log("result",result);
     yield put(ducks.loginSuccess(result));
     yield put(ducks.showAlertSnackbar(tools.LOGIN_SUCCESSFULLY));
     localStorage.setItem('auth', JSON.stringify(result));
