@@ -4,6 +4,7 @@ import withAuthentication from 'hocs/withAuthentication';
 import { DashboardLayout, ErrorLayout } from 'layout';
 import { PublicPage } from 'pages';
 import TransferView from './pages/dashboard/transfer/TransferView'
+import ConfirmTransfer from './pages/dashboard/transfer/ConfirmTransferView'
 
 const routes = [
   {
@@ -54,7 +55,7 @@ const routes = [
       {
         path: '/dashboard/confirm',
         exact: true,
-        component: withAuthentication(() => <TransferView></TransferView>),
+        component: withAuthentication(() => <ConfirmTransfer></ConfirmTransfer>),
       },
     ],
   },

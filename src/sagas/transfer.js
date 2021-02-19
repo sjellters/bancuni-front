@@ -39,6 +39,7 @@ function* transferValidation(action) {
       yield put(ducks.verifyTransferSuccess(result));
       //localStorage.setItem('auth', JSON.stringify(result));
     } catch (error) {
+      console.log("Error calling transfer: ",error)
       const {
         message: { result },
       } = error.response.data;

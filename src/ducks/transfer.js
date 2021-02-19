@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   data: null,
   error: '',
+  validate: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,11 +19,12 @@ export default function reducer(state = initialState, action) {
         data: null,
       };
     case TRANSFER_SUCCESS:
-      console.log(action.payload.data)
+      console.log("Transfer success",action.payload.data)
       return {
         ...state,
         loading: false,
         data: action.payload.data,
+        validate: true,
       };
     case TRANSFER_ERROR:
       return {

@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { verifyTransferRequest } from 'ducks';
 
+import ConfirmTransfer from "../ConfirmTransferView";
+
 //import Alert from '@material-ui/lab/Alert';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,12 +34,14 @@ const useStyles = makeStyles((theme) => ({
 
 const TransferView = ({ route }) => {
     const auth = useSelector((state)=>state.auth);
+    const transferData = useSelector((state)=>state.transfer);
+    const  isValidaded = transferData.validate;
     const classes = useStyles();
     let history = useHistory();
     const dispatch = useDispatch();
     const [transfer,setTransfer ]= useState({
         available:"122000",
-        sender : "Freider Achic",
+        sender : "602f6fbc8a482e7872165ce7",
         receiver : "",
         amount : "",
         message : ""
@@ -57,12 +61,15 @@ const TransferView = ({ route }) => {
         }
         console.log(transfer);
     }
+    // sender: 602f6fbc8a482e7872165ce7
+    // receiver: 602f78b68a482e7872165ce9
     
     const handleContinue = (e)=>{
         alert("go to Confirm")
         console.log("Token desde vista",auth.data["access-token"]);
         dispatch(verifyTransferRequest(transfer,auth.data["access-token"]))
-        history.push('/dashboard/confirm')
+        console.log("Transfer desde vista",transferData);
+        //history.push('/dashboard/confirm')
     }
     const handleBack = (e)=>{
         alert("go Back")
@@ -70,7 +77,12 @@ const TransferView = ({ route }) => {
 
   return (
     <Container className={classes.root}>
-        <Paper>
+        <ConfirmTransfer></ConfirmTransfer>,
+        {transferData.validate?(<div>
+            <ConfirmTransfer></ConfirmTransfer>
+        </div>):(
+          <div>
+              <Paper>
             <Typography variant='h3' >Transfer Details</Typography>
         </Paper>
         <Paper className={classes.container} >
@@ -159,6 +171,9 @@ const TransferView = ({ route }) => {
             </Box>
         </Box>
         </Paper>
+          </div>
+        )}
+        
     </Container>
   );
 };
