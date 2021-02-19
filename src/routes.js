@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import withAuthentication from 'hocs/withAuthentication';
 import { DashboardLayout, ErrorLayout } from 'layout';
 
+import DashboardHome from 'pages/Dashboard/Account/index'
+
 const routes = [
   {
     path: '/error',
@@ -45,7 +47,12 @@ const routes = [
       {
         path: '/dashboard/account',
         exact: true,
-        component: () => <DashboardLayout route= {"/dashboard/account"} />//withAuthentication(() => <div>Dashboard home</div>),
+        component: () => <DashboardHome />// withAuthentication() //
+      },
+      {
+        path: '/dashboard/account',
+        exact: true,
+        component: () => <DashboardLayout route= {"/dashboard/account"} />// withAuthentication(() => <div>Dashboard home</div>) //
       },
     ],
   },

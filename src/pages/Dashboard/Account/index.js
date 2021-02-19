@@ -1,7 +1,9 @@
 import React from 'react';
-import { renderRoutes } from 'react-router-config';
 
 import { makeStyles } from '@material-ui/core';
+
+import CurrentAccount from './CurrentAccount';
+import TransactionsTable from './TransactionsTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,18 +15,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dashboard = ({ route }) => {
+const DashboardHome = ({ route }) => {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <main className={classes.root}> 
       
-      {renderRoutes(route.routes)} 
+        <CurrentAccount />
+        <TransactionsTable />
 
       </main>
      </React.Fragment>
   );
 };
 
-export default Dashboard;
+export default DashboardHome;

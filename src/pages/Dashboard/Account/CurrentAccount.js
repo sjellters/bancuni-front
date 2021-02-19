@@ -2,6 +2,10 @@ import React , {useState, useEffect} from 'react';
 import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 import { makeStyles, Paper, Typography} from '@material-ui/core';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import { accountRequest } from '../../../ducks/account'
+import { userRequest } from '../../../ducks/user'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,26 +38,43 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Dashboard = ({ route }) => {
+const CurrentAccount = ({ route }) => {
+
   const classes = useStyles();
 
-  const [userName, setUserName] = useState("Ryuza");
-  const [userLastName, setUserLastName] = useState("Limachi");
-  const [money, setMoney] = useState(100.80);
-  const [userId, setuserId] = useState("1231354654");
+  const [dataUser, setDataUser] = useState([]);
+  const [data, setData] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const accountInfo = useSelector((state) => state.account);
+  const accountAllInfo = useSelector(state => state.user);
+
+  useEffect(() => {
+    
+    dispatch(accountRequest());
+    setData(accountInfo.data);
+    console.log(data);
+
+    const id = "656565";
+    dispatch(userRequest(id));
+    setData(accountAllInfo.data);
+    console.log(data);
+
+  }, []);
 
   return (
     <React.Fragment>
       <main className={classes.root}>
         
-        {/* {renderRoutes(route.routes)} */}
         <Typography variant={'h4'} classes={{h4: classes.Tittle}}>
             Current Account
         </Typography>
 
+        
         <Typography  variant={'h5'}>
           <span>
-          <AttachMoneyRoundedIcon style={{ fontSize: 20 }} />{money}
+          <AttachMoneyRoundedIcon style={{ fontSize: 20 }} />{dataUser.money}
           </span>
         </Typography>
 
@@ -63,7 +84,7 @@ const Dashboard = ({ route }) => {
               UserID:
             </Typography>
             <Typography>
-              {userId}
+              {dataUser._id}
             </Typography>
           </div>
           <div className={classes.Data}>
@@ -71,7 +92,7 @@ const Dashboard = ({ route }) => {
               Name: 
             </Typography>
             <Typography>
-              {userName}
+              {dataUser.names}
             </Typography >
           </div>
           <div className={classes.Data}>
@@ -79,14 +100,15 @@ const Dashboard = ({ route }) => {
               Last Name: 
             </Typography>
             <Typography>
-              {userLastName}
+              {dataUser.lastnames}
             </Typography>
           </div>          
         </Paper>
+
 
       </main>
      </React.Fragment>
   );
 };
 
-export default Dashboard;
+export default CurrentAccount;

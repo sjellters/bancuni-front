@@ -9,6 +9,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import { transactionRequest } from '../../../ducks/transaction'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -58,7 +62,17 @@ const TransactionTable = ({ route }) => {
     message: "I sent this."
   }, ]);
 
+  const dispatch = useDispatch();
 
+  const transactionInfo = useSelector(state => state.transaction);
+
+  useEffect(() => {
+    
+    dispatch(transactionRequest());
+    //setData(transactionInfo.data);
+    console.log(data);
+
+  }, []);
 
   return (
     <React.Fragment>
