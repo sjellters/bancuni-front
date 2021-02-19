@@ -12,7 +12,7 @@ function* confirmTransferValidation(action) {
 
       const {
         message: { result },
-      } = yield call(tools.Get, `/transfers/execute/{params}`, {},{
+      } = yield call(tools.Get, `/transfers/execute/${params}`, {},{
         Authorization: `Bearer ${token}`,
       });
       yield put(ducks.verifyConfirmTransferSuccess(result));

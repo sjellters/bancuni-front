@@ -52,11 +52,6 @@ const routes = [
         exact: true,
         component: withAuthentication(TransferView),
       },
-      {
-        path: '/dashboard/confirm',
-        exact: true,
-        component: withAuthentication(ConfirmTransfer),
-      },
     ],
   },
   {

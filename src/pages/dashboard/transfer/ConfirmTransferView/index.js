@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import TextField from '@material-ui/core/TextField';
@@ -10,10 +10,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DoubleArrowOutlinedIcon from '@material-ui/icons/DoubleArrowOutlined';
 import { makeStyles, withStyles} from '@material-ui/core/styles';
 import {Typography } from '@material-ui/core';
-
+import {useHistory} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { verifyTransferRequest, verifyConfirmTransferRequest } from 'ducks';
+import { verifyTransferRequest, verifyConfirmTransferRequest , userRequest} from 'ducks';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,18 +22,22 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const user = "Stewart";
-
 export default function FormDialog() {
   const transferData = useSelector((state)=>state.transfer);
-
+  const user = useSelector((state)=>state.user);
   const [open, setOpen] = React.useState(true);
   const classes = useStyles();
   const auth = useSelector((state)=>state.auth);
   const dispatch = useDispatch();
+  let history = useHistory();
 
  const handlePay = () => {
    dispatch(verifyConfirmTransferRequest(transferData.data.id,auth.data["access-token"]));
+ }
+
+ const handleBack = () => {
+  setOpen(false);
+  history.push('/dashboard/account')
  }
   const handleClickOpen = () => {
     setOpen(true);
@@ -42,9 +46,15 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  return (
-    <div>
+  useEffect(() => {
+    if (transferData.data != null) {
+      dispatch(userRequest(transferData.data.receiver, auth.data['access-token']));
+    }
+  }, [transferData, dispatch, auth]);
 
+  return (
+    (transferData.data && user.data ) &&
+    <div>
       <Dialog open={open} onClose={handleClose}  aria-labelledby="form-dialog-title" >
         <div className={classes.icon}>
           <AccountCircleOutlinedIcon style={{ fontSize: 100 }}/>
@@ -52,24 +62,17 @@ export default function FormDialog() {
           <AccountCircleOutlinedIcon style={{ fontSize: 100 }}/>
         </div>
         <DialogTitle id="customized-dialog-title" style={{ textAlign: 'center' }}>
-          {transferData.data.id}
+          Pay {user.data.names}
         </DialogTitle>
         <DialogContent dividers>
           <Typography> {transferData.data.message} </Typography>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="password"
-            label="Password"
-            type="password"
-            fullWidth
-          />
+
         </DialogContent>
         <DialogActions className={classes.button}>
           <Button onClick={handlePay} variant="outlined" color="primary">
             Proceed to pay
           </Button>
-          <Button variant="outlined" color="primary" >
+          <Button onClick={handleBack} variant="outlined" color="primary" >
             Back
           </Button>
         </DialogActions>
