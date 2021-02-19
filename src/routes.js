@@ -6,7 +6,7 @@ import { PublicPage } from 'pages';
 import TransferView from './pages/dashboard/transfer/TransferView'
 import ConfirmTransfer from './pages/dashboard/transfer/ConfirmTransferView'
 
-import DashboardHome from 'pages/Dashboard/Account'
+import DashboardHome from 'pages/dashboard/Account'
 
 const routes = [
   {
