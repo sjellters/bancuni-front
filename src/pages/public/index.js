@@ -89,7 +89,10 @@ const Login = () => {
     password: '',
   });
   const [dataUser, setDataUser] = useState({
-    
+    names: '',
+    lastNames: '',
+    email: '',
+    password: '',
   });
   const showRegister = useSelector((state) => state.auth.showRegister);
   const history = useHistory();
@@ -200,24 +203,75 @@ const Login = () => {
             <GeneralAuth
               mainTitle="Registrate"
               secondaryTitles={['']}
-              subtitles={[
-                'Ingrese sus datos',
-              ]}
+              subtitles={['Ingrese sus datos']}
             >
-              {/* <div className={classes.gridContainer}>
-              {credentials.map((value, index) => {
-                return (
-                  <div className={classes.gridItem} key={index}>
-                    <CustomInputPassword
-                      onChange={(e) => setPasswordValue(e.target.value, index)}
-                      value={credentials[index]}
-                      placeholder={'Ingrese key ' + (index + 1)}
-                      inputProps={{ 'aria-label': 'password-member-input' }}
-                    />
-                  </div>
-                );
-              })}
-            </div> */}
+              <div className={classes.inputUserPassword}>
+                <CustomInput
+                  beforeicon={
+                    <IconButton disabled aria-label="user-icon">
+                      <PersonRoundedIcon />
+                    </IconButton>
+                  }
+                  autoFocus
+                  onChange={(e) =>
+                    setDataUser({
+                      ...dataUser,
+                      names: e.target.value,
+                    })
+                  }
+                  value={dataUser.names}
+                  type="names"
+                  placeholder="Ingrese su nombre"
+                  inputProps={{ 'aria-label': 'user-input' }}
+                />
+                <CustomInput
+                  beforeicon={
+                    <IconButton disabled aria-label="user-icon">
+                      <PersonRoundedIcon />
+                    </IconButton>
+                  }
+                  autoFocus
+                  onChange={(e) =>
+                    setDataUser({
+                      ...dataUser,
+                      lastNames: e.target.value,
+                    })
+                  }
+                  value={dataUser.lastNames}
+                  type="lastNames"
+                  placeholder="Ingrese su apellido"
+                  inputProps={{ 'aria-label': 'user-input' }}
+                />
+                <CustomInput
+                  beforeicon={
+                    <IconButton disabled aria-label="user-icon">
+                      <PersonRoundedIcon />
+                    </IconButton>
+                  }
+                  autoFocus
+                  onChange={(e) =>
+                    setDataUser({
+                      ...dataUser,
+                      email: e.target.value,
+                    })
+                  }
+                  value={dataUser.email}
+                  type="email"
+                  placeholder="Ingrese su correo electronico"
+                  inputProps={{ 'aria-label': 'user-input' }}
+                />
+                <CustomInputPassword
+                  onChange={(e) =>
+                    setDataUser({
+                      ...dataUser,
+                      password: e.target.value,
+                    })
+                  }
+                  value={dataUser.password}
+                  placeholder="Ingrese su contraseña"
+                  inputProps={{ 'aria-label': 'password-input' }}
+                />
+              </div>
               <div className={classes.buttonsSection}>
                 <Button
                   size="large"

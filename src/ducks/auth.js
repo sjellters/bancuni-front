@@ -3,7 +3,7 @@ export const LOGIN_SUCCESS = 'bancuni/auth/LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'bancuni/auth/LOGIN_ERROR';
 
 export const GO_TO_REGISTER = 'bancuni/auth/GO_TO_REGISTER';
-export const BACK_TO_LOGIN = 'bancuni/auth/GO_TO_LOGIN';
+export const BACK_TO_LOGIN = 'bancuni/auth/BACK_TO_LOGIN';
 
 const initialState = {
   loading: false,
