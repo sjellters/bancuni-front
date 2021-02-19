@@ -10,6 +10,9 @@ const withAuthentication = (Component) => () => {
 
   useEffect(() => {
     if (currentSession != null) {
+      // TODO Dispatch action to save token on localStorage
+      console.log(currentSession);
+      console.log('Session not found!');
       dispatch(loginSuccess(currentSession));
     }
   }, [dispatch, currentSession]);
