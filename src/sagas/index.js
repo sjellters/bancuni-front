@@ -3,8 +3,9 @@ import * as authSagas from './auth';
 
 function* rootSaga() {
   yield all([
-    fork(authSagas.loginSaga), 
-    fork(authSagas.registerSaga)
+    fork(authSagas.loginSaga),
+    fork(authSagas.registerSaga),
+    fork(authSagas.logoutSaga),
   ]);
 }
 

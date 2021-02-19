@@ -12,12 +12,14 @@ const routes = [
       {
         path: '/error/401',
         exact: true,
-        component: () => <div>Error 401</div>,
+        component: () => (
+          <div>Usted no se encuentra autorizado para ingresar a esta ruta</div>
+        ),
       },
       {
         path: '/error/404',
         exact: true,
-        component: () => <div>Error 404</div>,
+        component: () => <div>Error 404: Not Found!</div>,
       },
       {
         component: () => <Redirect to="/error/404" />,

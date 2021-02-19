@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import {
   Button,
   Hidden,
@@ -11,7 +10,6 @@ import {
   IconButton,
   Paper,
 } from '@material-ui/core';
-
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
@@ -102,6 +100,7 @@ const Login = () => {
   const showRegister = useSelector((state) => state.auth.showRegister);
   const history = useHistory();
   const dispatch = useDispatch();
+  const currentSession = localStorage.getItem('auth');
 
   const handleLogin = () => {
     dispatch(loginRequest(credentials, history));
@@ -110,7 +109,7 @@ const Login = () => {
     dispatch(registerRequest(dataUser));
   };
 
-  return (
+  return !currentSession ? (
     <div>
       <Paper className={classes.root}>
         {!showRegister ? (
@@ -298,6 +297,8 @@ const Login = () => {
         )}
       </Paper>
     </div>
+  ) : (
+    <Redirect to="/dashboard" />
   );
 };
 

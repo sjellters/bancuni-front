@@ -9,6 +9,8 @@ export const REGISTER_REQUEST = 'bancuni/auth/REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'bancuni/auth/REGISTER_SUCCESS';
 export const REGISTER_ERROR = 'bancuni/auth/REGISTER_ERROR';
 
+export const LOGOUT = 'bancuni/auth/LOGOUT';
+
 const initialState = {
   loading: false,
   data: null,
@@ -67,6 +69,13 @@ export default function reducer(state = initialState, action) {
         error: action.payload.message,
         data: null,
       };
+    case LOGOUT:
+      return {
+        ...state,
+        loading: false,
+        error: '',
+        data: null,
+      };
     default:
       return state;
   }
@@ -110,4 +119,9 @@ export const registerSuccess = (data) => ({
 export const registerError = (message) => ({
   type: REGISTER_ERROR,
   payload: { message },
+});
+
+export const logout = (history) => ({
+  type: LOGOUT,
+  payload: { history },
 });

@@ -15,17 +15,13 @@ function* login(action) {
     yield put(ducks.loginSuccess(result));
     yield put(ducks.showAlertSnackbar(tools.LOGIN_SUCCESSFULLY));
     localStorage.setItem('auth', JSON.stringify(result));
-    // history.push('/dashboard');
+    history.push('/dashboard');
   } catch (error) {
     const {
       message: { result },
     } = error.response.data;
     yield put(ducks.loginError(result));
-    yield put(
-      ducks.showAlertSnackbar(
-        tools.createNewAlertSnackbarMessage('error', result)
-      )
-    );
+    alert(result);
   }
 }
 
@@ -48,12 +44,19 @@ function* register(action) {
       message: { result },
     } = error.response.data;
     yield put(ducks.registerError(result));
-    yield put(
-      ducks.showAlertSnackbar(
-        tools.createNewAlertSnackbarMessage('error', result)
-      )
-    );
+    alert(result);
   }
+}
+
+function logout(action) {
+  const { history } = action.payload;
+
+  localStorage.removeItem('auth');
+  history.push('/');
+}
+
+export function* logoutSaga() {
+  yield takeLatest(ducks.LOGOUT, logout);
 }
 
 export function* loginSaga() {
