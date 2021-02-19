@@ -4,8 +4,8 @@ import { makeStyles, Paper, Typography} from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { accountRequest } from '../../../ducks/account'
-import { userRequest } from '../../../ducks/user'
+import { accountRequest } from '../../../ducks/account';
+import { userRequest } from '../../../ducks/user';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,23 +43,27 @@ const CurrentAccount = ({ route }) => {
   const classes = useStyles();
 
   const [dataUser, setDataUser] = useState([]);
-  const [data, setData] = useState([]);
+  const [account, setAccount] = useState([]);
 
   const dispatch = useDispatch();
 
+  const auth = useSelector((state) => state.auth);
   const accountInfo = useSelector((state) => state.account);
-  const accountAllInfo = useSelector(state => state.user);
+  const accountAllInfo = useSelector((state) => state.user);
+
+
+  console.log("Token desde vista",auth);
 
   useEffect(() => {
     
     dispatch(accountRequest());
-    setData(accountInfo.data);
-    console.log(data);
+    //setAccount(accountInfo.data);
+    //console.log(account);
 
     const id = "656565";
     dispatch(userRequest(id));
-    setData(accountAllInfo.data);
-    console.log(data);
+    //setDataUser(accountAllInfo.data);
+    //console.log(dataUser);
 
   }, []);
 
@@ -74,7 +78,7 @@ const CurrentAccount = ({ route }) => {
         
         <Typography  variant={'h5'}>
           <span>
-          <AttachMoneyRoundedIcon style={{ fontSize: 20 }} />{dataUser.money}
+          <AttachMoneyRoundedIcon style={{ fontSize: 20 }} />{dataUser.available}
           </span>
         </Typography>
 
@@ -84,7 +88,7 @@ const CurrentAccount = ({ route }) => {
               UserID:
             </Typography>
             <Typography>
-              {dataUser._id}
+              {dataUser.id}
             </Typography>
           </div>
           <div className={classes.Data}>
