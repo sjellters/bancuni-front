@@ -2,6 +2,11 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import withAuthentication from 'hocs/withAuthentication';
 import { DashboardLayout, ErrorLayout } from 'layout';
+import { PublicPage } from 'pages';
+import TransferView from './pages/dashboard/transfer/TransferView'
+import ConfirmTransfer from './pages/dashboard/transfer/ConfirmTransferView'
+
+import DashboardHome from 'pages/dashboard/Account'
 
 const routes = [
   {
@@ -11,12 +16,14 @@ const routes = [
       {
         path: '/error/401',
         exact: true,
-        component: () => <div>Error 401</div>,
+        component: () => (
+          <div>Usted no se encuentra autorizado para ingresar a esta ruta</div>
+        ),
       },
       {
         path: '/error/404',
         exact: true,
-        component: () => <div>Error 404</div>,
+        component: () => <div>Error 404: Not Found!</div>,
       },
       {
         component: () => <Redirect to="/error/404" />,
@@ -26,12 +33,7 @@ const routes = [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/login" />,
-  },
-  {
-    path: '/login',
-    exact: true,
-    component: () => <div>Login</div>,
+    component: PublicPage,
   },
   {
     path: '/dashboard',
@@ -45,7 +47,17 @@ const routes = [
       {
         path: '/dashboard/account',
         exact: true,
-        component: () => <DashboardLayout route= {"/dashboard/account"} />//withAuthentication(() => <div>Dashboard home</div>),
+        component: withAuthentication(() => <DashboardHome />) //
+      },
+      {
+        path: '/dashboard/transfers',
+        exact: true,
+        component: withAuthentication(() => <TransferView></TransferView>),
+      },
+      {
+        path: '/dashboard/confirm',
+        exact: true,
+        component: withAuthentication(() => <ConfirmTransfer></ConfirmTransfer>),
       },
     ],
   },
