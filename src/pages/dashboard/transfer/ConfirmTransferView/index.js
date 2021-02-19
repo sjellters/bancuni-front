@@ -8,7 +8,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DoubleArrowOutlinedIcon from '@material-ui/icons/DoubleArrowOutlined';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles} from '@material-ui/core/styles';
+import {Typography } from '@material-ui/core';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { verifyTransferRequest } from 'ducks';
+
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -19,14 +25,17 @@ const useStyles = makeStyles((theme) => ({
 const user = "Stewart";
 
 export default function FormDialog() {
-    
+  const transferData = useSelector((state)=>state.transfer);
+
   const [open, setOpen] = React.useState(true);
   const classes = useStyles();
 
+ const handlePay = () => {
+   
+ }
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -41,17 +50,10 @@ export default function FormDialog() {
           <AccountCircleOutlinedIcon style={{ fontSize: 100 }}/>
         </div>
         <DialogTitle id="customized-dialog-title" style={{ textAlign: 'center' }}>
-          Pay {user}
+          User
         </DialogTitle>
         <DialogContent dividers>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="message"
-            label="Message"
-            type="text"
-            fullWidth
-          />
+          <Typography> {transferData.data.message} </Typography>
           <TextField
             autoFocus
             margin="dense"
@@ -62,7 +64,7 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions className={classes.button}>
-          <Button variant="outlined" color="primary">
+          <Button onClick={handlePay} variant="outlined" color="primary">
             Proceed to pay
           </Button>
           <Button variant="outlined" color="primary" >

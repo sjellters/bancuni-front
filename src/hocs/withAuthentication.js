@@ -1,4 +1,4 @@
-
+import { loginSuccess } from '../ducks'
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
