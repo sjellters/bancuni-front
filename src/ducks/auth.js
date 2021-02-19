@@ -1,11 +1,15 @@
-export const LOGIN_REQUEST = 'balcuni/auth/LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'balcuni/auth/LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'balcuni/auth/LOGIN_ERROR';
+export const LOGIN_REQUEST = 'bancuni/auth/LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'bancuni/auth/LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'bancuni/auth/LOGIN_ERROR';
+
+export const GO_TO_REGISTER = 'bancuni/auth/GO_TO_REGISTER';
+export const BACK_TO_LOGIN = 'bancuni/auth/GO_TO_LOGIN';
 
 const initialState = {
   loading: false,
   data: null,
   error: '',
+  showRegister: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -28,6 +32,19 @@ export default function reducer(state = initialState, action) {
         error: action.payload.message,
         data: null,
       };
+    case GO_TO_REGISTER:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+        showRegister: true,
+      };
+    case BACK_TO_LOGIN:
+      return {
+        ...state,
+        loading: false,
+        showRegister: false,
+      };
     default:
       return state;
   }
@@ -45,5 +62,15 @@ export const loginSuccess = (data) => ({
 
 export const loginError = (message) => ({
   type: LOGIN_ERROR,
+  payload: { message },
+});
+
+export const goToRegister = (data) => ({
+  type: GO_TO_REGISTER,
+  payload: { data },
+});
+
+export const backToLogin = (message) => ({
+  type: BACK_TO_LOGIN,
   payload: { message },
 });

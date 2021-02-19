@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import withAuthentication from 'hocs/withAuthentication';
-import { DashboardLayout, ErrorLayout } from 'layout';
+import { DashboardLayout, ErrorLayout, LoginLayout } from 'layout';
 
 const routes = [
   {
@@ -31,7 +31,7 @@ const routes = [
   {
     path: '/login',
     exact: true,
-    component: () => <div>Login</div>,
+    component: LoginLayout,
   },
   {
     path: '/dashboard',
