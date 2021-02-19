@@ -3,9 +3,16 @@ import { renderRoutes } from 'react-router-config';
 
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
+import TransactionsTable from './TransactionsTable';
+import CurrentAccount from './CurrentAccount';
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    height: `100vh`,
+    display: 'flex',
+    flexDirection: 'column',
+    '& > *': {
+      margin: theme.spacing(2),
+    },
   },
 }));
 
@@ -14,8 +21,11 @@ const Dashboard = ({ route }) => {
 
   return (
     <React.Fragment>
-      <main className={classes.root}>{renderRoutes(route.routes)}</main>
-    </React.Fragment>
+      <main className={classes.root}> {/* {renderRoutes(route.routes)} */}
+        <CurrentAccount />
+        <TransactionsTable />     
+      </main>
+     </React.Fragment>
   );
 };
 
