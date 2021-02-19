@@ -37,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
 
 const TransferView = ({ route }) => {
     const auth = useSelector((state)=>state.auth);
+    const transferData = useSelector((state)=>state.transfer);
+    const userData = useSelector((state)=>state.account);
+
+    const  isValidaded = transferData.validate;
     const classes = useStyles();
     let history = useHistory();
     const dispatch = useDispatch();

@@ -1,7 +1,10 @@
+import { GO_TO_REGISTER } from "./auth";
+
 export const TRANSFER_REQUEST = 'bancuni/auth/ID_REQUEST';
 export const TRANSFER_SUCCESS = 'bancuni/auth/ID_SUCCESS';
 export const TRANSFER_ERROR = 'bancuni/auth/ID_ERROR';
 
+export const GO_TO_BACK_TRANSFER = 'bancuni/transfer/GO_TO_BACK_TRANSFER';
 
 const initialState = {
   loading: false,
@@ -32,6 +35,13 @@ export default function reducer(state = initialState, action) {
         loading: false,
         error: action.payload.message,
         data: null,
+        validate: false,
+      };
+    case GO_TO_BACK_TRANSFER:
+      return {
+        ...state,
+        loading: false,
+        validate: false,
       };
     default:
       return state;
@@ -52,3 +62,9 @@ export const verifyTransferError = (message) => ({
   type: TRANSFER_ERROR,
   payload: { message },
 });
+
+export const backTransfer = (message) => ({
+  type: GO_TO_BACK_TRANSFER,
+  payload: { message },
+});
+
