@@ -23,15 +23,18 @@ function* login(action) {
 }
 
 function* transferValidation(action) {
+    //let token =localStorage.getItem("auth")["access-token"];
     try {
-      const { params } = action.payload;
+      const { params,token } = action.payload;
       const {
         message: { result },
-      } = yield call(tools.Post, '/verifyTransfer', {
+      } = yield call(tools.Post, '/transfers/verifyTransfer', {
         amount: params.amount,
         message: params.message,
         sender: params.sender,
-        reciever: params.reciever,
+        receiver: params.receiver,
+      },{
+        Authorization: `Bearer ${token}`,
       });
       yield put(ducks.verifyTransferSuccess(result));
       //localStorage.setItem('auth', JSON.stringify(result));

@@ -36,9 +36,9 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const verifyTransferRequest = (params) => ({
+export const verifyTransferRequest = (params,token) => ({
   type: TRANSFER_REQUEST,
-  payload: { params },
+  payload: { params , token },
 });
 
 export const verifyTransferSuccess = (data) => ({
