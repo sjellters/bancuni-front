@@ -34,7 +34,7 @@ export default function FormDialog() {
   return (
     <div>
 
-      <Dialog open={open} onClose={handleClose}  aria-labelledby="form-dialog-title" >
+      <Dialog open={true} onClose={handleClose}  aria-labelledby="form-dialog-title" >
         <div className={classes.icon}>
           <AccountCircleOutlinedIcon style={{ fontSize: 100 }}/>
           <DoubleArrowOutlinedIcon style={{ fontSize: 70 }}/>
