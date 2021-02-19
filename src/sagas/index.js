@@ -7,6 +7,7 @@ import * as transactionSagas from './transaction';
 function* rootSaga() {
   yield all([
     fork(authSagas.loginSaga),
+    fork(authSagas.registerSaga),
     fork(accountSagas.accountSaga),
     fork(userSagas.userSaga),
     fork(transactionSagas.transactionSaga),
