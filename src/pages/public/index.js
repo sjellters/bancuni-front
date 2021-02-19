@@ -18,7 +18,12 @@ import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 
 import { CustomInput, CustomInputPassword, GeneralAuth } from 'components';
 
-import { goToRegister, backToLogin } from 'ducks';
+import {
+  goToRegister,
+  backToLogin,
+  loginRequest,
+  registerRequest,
+} from 'ducks';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,8 +103,12 @@ const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleLogin = () => {};
-  const handleRegister = () => {};
+  const handleLogin = () => {
+    dispatch(loginRequest(credentials, history));
+  };
+  const handleRegister = () => {
+    dispatch(registerRequest(dataUser));
+  };
 
   return (
     <div>
