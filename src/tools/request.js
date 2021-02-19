@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const BASE_URl = 'https://bankuni-core.herokuapp.com';
+const baseURL = 'https://bankuni-core.herokuapp.com';
 
 const axiosInstance = (headers) => {
   let instance = axios.create({
-    BASE_URl,
+    baseURL,
     headers,
   });
 
