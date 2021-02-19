@@ -40,7 +40,7 @@ const TransferView = ({ route }) => {
     let history = useHistory();
     const dispatch = useDispatch();
     const [transfer,setTransfer ]= useState({
-        available:"122000",
+        available:"12200",
         sender : "602f6fbc8a482e7872165ce7",
         receiver : "",
         amount : "",

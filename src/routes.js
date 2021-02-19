@@ -45,10 +45,10 @@ const routes = [
       {
         path: '/dashboard/account',
         exact: true,
-        component: withAuthentication(() => <TransferView></TransferView>),
+        component: withAuthentication(() => <div><h1>Home</h1></div>),
       },
       {
-        path: '/dashboard/transfer',
+        path: '/dashboard/transfers',
         exact: true,
         component: withAuthentication(() => <TransferView></TransferView>),
       },
