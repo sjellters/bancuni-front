@@ -2,11 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Installation
+* Install with [npm](https://www.npmjs.com/package/democracy): `npm install democracy`
+* Install with [Yarn](https://yarnpkg.com/en/package/democracy): `yarn add democracy` 
 
-In the project directory, you can run:
+## Quick Start
 
-### `yarn start`
+* `yarn start`
+* 'npm insall'
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
