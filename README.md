@@ -8,10 +8,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Quick Start
 
-* Install with [npm]: `yarn start`
-* Install with [Yarn]: `npm start`
+* Install with [npm]: `npm start`
+* Install with [Yarn]: `yarn start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+* Open [https://bankuni.netlify.app/](https://bankuni.netlify.app/) to view it in the browser.
 
